@@ -20,8 +20,12 @@ for x in range(0, image.shape[1] - w_width , stepSize):
         prediksi = model.predict(window)
         prediksi = np.argmax(prediksi, axis=1)
         
-        # draw window on image
-        cv2.rectangle(tmp, (x, y), (x + w_width, y + w_height), (255, 0, 0), 2) # draw rectangle on image
+        if prediksi==0:
+            cv2.rectangle(tmp, (x, y), (x + w_width, y + w_height), (255, 0, 0), 2)
+        elif prediksi==1:
+            cv2.rectangle(tmp, (x, y), (x + w_width, y + w_height), (0, 255, 0), 2)
+        elif prediksi==2:
+            cv2.rectangle(tmp, (x, y), (x + w_width, y + w_height), (0, 0, 255), 2)
         plt.imshow(np.array(tmp).astype('uint8'))
 # show all windows
 #plt.show()
