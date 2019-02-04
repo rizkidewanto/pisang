@@ -7,9 +7,9 @@ from keras.models import load_model
 # (width,height)
 image = cv2.imread('pisang.jpg') # your image path
 tmp = image # for drawing a rectangle
-stepSize = 150
+stepSize = 50
 model=load_model('classifier.h5')
-(w_width, w_height) = (150, 150) # window size
+(w_width, w_height) = (50, 50) # window size
 for x in range(0, image.shape[1] - w_width , stepSize):
     for y in range(0, image.shape[0] - w_height, stepSize):
         window = image[x:x + w_width, y:y + w_height, :]
