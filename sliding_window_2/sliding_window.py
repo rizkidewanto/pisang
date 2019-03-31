@@ -6,14 +6,17 @@ import numpy as np
 from keras.models import load_model
 
 image = cv2.imread('pisang.jpg') # your image path
+#image = cv2.resize(image,(400,300))
 tmp = image # for drawing a rectangle
-stepSize = 50
+stepSize = 10
 model=load_model('classifier_10.h5')
 (w_width, w_height) = (50, 50) # window size
-for x in range(0, image.shape[1] - w_width , stepSize):
+for x in range(0, image.shape[1] - w_width, stepSize):
     for y in range(0, image.shape[0] - w_height, stepSize):
+        print("Nilai x : ",x)
+        print("Nilai y : ",y)
         window = image[x:x + w_width, y:y + w_height, :]
-        window=cv2.resize(window,dsize=(10,10))
+        window = cv2.resize(window,dsize=(10,10))
         window = np.expand_dims(window, axis=0)
         prediksi = model.predict(window)
         prediksi = np.argmax(prediksi, axis=1)
@@ -27,5 +30,7 @@ for x in range(0, image.shape[1] - w_width , stepSize):
         #    cv2.rectangle(tmp, (x, y), (x + w_width, y + w_height), (0, 0, 255), 2)
         plt.imshow(np.array(tmp).astype('uint8'))
 #plt.show()
+print("Width : ",image.shape[1])
+print("Height : ",image.shape[0])
 cv2.imshow('Gambar',np.array(tmp).astype('uint8'))
 cv2.waitKey(0)
